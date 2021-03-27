@@ -28,5 +28,10 @@ public class board {
 	public piece Piece(position Position) {
 		return Piece[Position.getRow()][Position.getColumn()];	
 		              }
+	public void placepiece(piece Pie, position Posi) {
+		Piece [Posi.getRow()][Posi.getColumn()]=Pie;
+		Pie.Position=Posi;
+		
+	}
 
 }
