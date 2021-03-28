@@ -27,11 +27,23 @@ public class chessmatch {
 		
 	}
 	private void initialsetup() {
-		placenewpiece('b',6,new Rook(Board,color.WHITE));
-		placenewpiece('e',8,new king(Board,color.BLACK));
-		placenewpiece('e',1,new king(Board,color.WHITE));
+		placenewpiece('c', 1, new Rook(Board, color.WHITE));
+        placenewpiece('c', 2, new Rook(Board, color.WHITE));
+        placenewpiece('d', 2, new Rook(Board, color.WHITE));
+        placenewpiece('e', 2, new Rook(Board, color.WHITE));
+        placenewpiece('e', 1, new Rook(Board, color.WHITE));
+        placenewpiece('d', 1, new king(Board, color.WHITE));
+
+        placenewpiece('c', 7, new Rook(Board, color.BLACK));
+        placenewpiece('c', 8, new Rook(Board, color.BLACK));
+        placenewpiece('d', 7, new Rook(Board, color.BLACK));
+        placenewpiece('e', 7, new Rook(Board, color.BLACK));
+        placenewpiece('e', 8, new Rook(Board, color.BLACK));
+        placenewpiece('d', 8, new king(Board, color.BLACK));
+	}
+
 	}
 	
 	
 
-}
+
