@@ -1,5 +1,7 @@
 package chess;
 
+import com.sun.javadoc.SourcePosition;
+
 import boardgame.board;
 import boardgame.piece;
 import boardgame.position;
@@ -23,6 +25,12 @@ public class chessmatch {
 	}
 	}
 	return mat;
+	}
+	public boolean[][]possiblemoves(ChessPosition sorceposition){
+		position Position= sorceposition.toposition();
+		validateSourcePosition(Position);
+		return Board.Piece(Position).possiblemoves();
+		//essa operação pra imprimir posição a partir posição origem
 	}
 	public chesspiece performChessMove(ChessPosition sourceposition,ChessPosition targetposition) {
 		position  source=sourceposition.toposition();

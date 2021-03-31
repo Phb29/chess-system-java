@@ -52,7 +52,8 @@ public class UI {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pieces.length; j++) {
-				printpiece(pieces[i][j]);
+				printpiece(pieces[i][j],false);
+				//indicar q nenhuma pessa tenha fundo colorido
 			}
 			System.out.println();
 
@@ -60,10 +61,28 @@ public class UI {
 		System.out.println("  a b c d e f g h");
 
 	}
+	public static void printboard(chesspiece[][] pieces,boolean[][]possiblemoves) {
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pieces.length; j++) {
+				printpiece(pieces[i][j],possiblemoves[i][j]);
+			}
+			System.out.println();
 
-	private static void printpiece(chesspiece piece) {
+		}
+		System.out.println("  a b c d e f g h");
+	}
+			
+		
+	private static void printpiece(chesspiece piece,boolean background)
+	{
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
+	
+	//vatiavel pra indicar se deve colorir ou nao {
 		if (piece == null) {
-			System.out.print("-");
+			System.out.print("-"+ANSI_RESET);
 		} else {
 			if (piece.getColor() == color.WHITE) {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
