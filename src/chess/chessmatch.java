@@ -2,6 +2,9 @@ package chess;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.board;
 import boardgame.piece;
 import boardgame.position;
@@ -11,6 +14,8 @@ import chess.pieces.king;
 public class chessmatch {
 	private int turn;
 	private color currentplayer;
+	private List<piece>piecesontheboard=new ArrayList<>();
+	private List<piece>capturedpieces=new ArrayList<>();
 	
 	private board Board;
 	
@@ -20,6 +25,7 @@ public class chessmatch {
 		initialsetup();
 		turn=1;
 		currentplayer=color.WHITE;
+		
 		
 		
 	}
@@ -57,6 +63,13 @@ public class chessmatch {
 		piece p=Board.removePiece(source);
 		piece capturedpiece=Board.removePiece(target);
 		Board.placepiece(p, target);
+		
+		if(capturedpiece!=null) {
+			piecesontheboard.remove(capturedpiece);
+			capturedpieces.add(capturedpiece);
+			//serve pra controlar quando tira peça e add nas capturdas;
+		}
+		
 		return capturedpiece;
 	}
 	
@@ -93,6 +106,8 @@ public class chessmatch {
 
 	private void placenewpiece(char column,int row,chesspiece Piece) {
 		Board.placepiece(Piece, new  ChessPosition(column, row).toposition());
+		piecesontheboard.add(Piece);
+		// alem de colocar peça tabuleiro,o de baixo coloca na lista tabuleiro
 		
 	}
 	

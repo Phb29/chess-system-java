@@ -1,7 +1,10 @@
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.ChessPosition;
 import chess.chessmatch;
@@ -49,8 +52,10 @@ public class UI {
 		}
 	}
 
-	public static void printmatch(chessmatch Chessmatch) {
+	public static void printmatch(chessmatch Chessmatch,List<chesspiece>captured) {
 		printboard(Chessmatch.getpieces());
+		System.out.println();
+		printcapturedpiece(captured);
 		System.out.println();
 		System.out.println("turn"+ Chessmatch.getturn());
 		System.out.println("waiting player" + Chessmatch.getcurrentplayer());
@@ -100,5 +105,24 @@ public class UI {
 			}
 		}
 		System.out.print(" ");
+	}
+	
+	private static void printcapturedpiece(List<chesspiece>captured) {
+		List<chesspiece>white= captured.stream().filter(x-> x.getColor()==color.WHITE).collect(Collectors.toList());
+		//isso serve pra filtrar todo mundo da cor branca
+		List<chesspiece>black= captured.stream().filter(x-> x.getColor()==color.BLACK).collect(Collectors.toList());
+		System.out.println("captures pieces");
+		System.out.print("white:");
+		System.out.print(ANSI_WHITE);
+		System.out.println(Arrays.toString(white.toArray()));
+		System.out.print(ANSI_RESET);
+		// ansi reset serve pra resetar a cor pra entra outra
+		// macete pra imprimir array padrao no java
+		System.out.println("captures pieces");
+		System.out.print("black:");
+		System.out.print(ANSI_YELLOW);
+		System.out.println(Arrays.toString(black.toArray()));
+		System.out.print(ANSI_RESET);
+		
 	}
 }
