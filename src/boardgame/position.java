@@ -20,6 +20,11 @@ public class position {
 	public void setColumn(int column) {
 		this.column = column;
 	}
+	public void setvalues(int row,int column) {
+		this.row=row;
+		this.column=column;
+		//fez pra receber valores de atualização da peça
+	}
 	@Override 
 	public String toString(){
 	return row + "," +column;

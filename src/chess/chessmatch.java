@@ -27,6 +27,7 @@ public class chessmatch {
 	public chesspiece performChessMove(ChessPosition sourceposition,ChessPosition targetposition) {
 		position  source=sourceposition.toposition();
 		position target=targetposition.toposition();
+		validattargetposition(source,target);
 		validateSourcePosition(source);
 		piece capturedPiece=makeMove(source,target);
 		return (chesspiece)capturedPiece;
@@ -47,6 +48,12 @@ public class chessmatch {
 			//exception quando n tem movimento possivel,o is pegou de outro lugar//
 			//exclamação começo q fez ele n funcionar,significa
 			//quando nao tiver posição ele faz a exception
+		}
+	}
+	private void validattargetposition(position source,position target) {
+		if(!Board.Piece(source).possiblemove(target)) {
+			//se a pessa de origem n é moviemnto possivel
+			throw new chessexception("no  possible move");
 		}
 	}
 	private void placenewpiece(char column,int row,chesspiece Piece) {
