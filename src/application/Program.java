@@ -35,7 +35,7 @@ public class Program {
 				// get message pra imprimir mensagem na tela//
 			}
 			catch(InputMismatchException e) {
-				System.out.println(e.getMessage());
+					System.out.println(e.getMessage());
 				sc.nextLine();
 				// get message pra imprimir mensagem na tela//
 			}

@@ -42,6 +42,12 @@ public class chessmatch {
 		if(!Board.thereiseapiece(Position)) {
 			throw new chessexception("there is no piece on  source position");
 		}
+		if(!Board.Piece(Position).ispossiblemove()) {
+			throw new chessexception("there not moves possible");
+			//exception quando n tem movimento possivel,o is pegou de outro lugar//
+			//exclamação começo q fez ele n funcionar,significa
+			//quando nao tiver posição ele faz a exception
+		}
 	}
 	private void placenewpiece(char column,int row,chesspiece Piece) {
 		Board.placepiece(Piece, new  ChessPosition(column, row).toposition());
