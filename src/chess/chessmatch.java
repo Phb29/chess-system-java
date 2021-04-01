@@ -16,6 +16,7 @@ public class chessmatch {
 	private int turn;
 	private color currentplayer;
 	private boolean check;
+	private boolean checkmate;
 	// propriedade boolean por padrao começa com falso
 	
 	private List<piece>piecesontheboard=new ArrayList<>();
@@ -44,6 +45,9 @@ public class chessmatch {
 		return check;
 		//quando usa get pra pegar em outra camada
 	}
+	public boolean getcheckmate() {
+		return checkmate;
+	}
 	public chesspiece[][] getpieces(){
 		chesspiece[][] mat= new chesspiece[Board.getRows()][Board.getColumns()];
 	for(int i=0; i<Board.getRows(); i++) {
@@ -71,8 +75,13 @@ public class chessmatch {
 		}
 		check=(testcheck(opponent(currentplayer)))? true : false;
 				//se essa condição for verdadeira a partida ta em check,se nao false
+		if(testcheck(opponent(currentplayer))) {
+			checkmate= true;
+		}
+		else {
 		
 		nextturn();
+		}
 		return (chesspiece)capturedPiece;
 	}
 	private piece makeMove(position source,position target) {
@@ -159,6 +168,36 @@ public class chessmatch {
 			return false;
 			//se esgotar e ver q n ta check volta falso
 		}
+		private  boolean testcheckmate(color Color) {
+			if(!testcheck(Color)) {
+				return false;
+				// se a cor n tiver em check,returna false
+			}
+			List<piece>list=piecesontheboard.stream().filter(x->((chesspiece)x).getColor()==opponent(Color)).collect(Collectors.toList());
+			for(piece p:list) {
+				boolean[][] mat=p.possiblemoves();
+				for(int i=0;i<Board.getRows();i++) {
+					for(int j=0;j<Board.getColumns();j++){
+						if(mat[i][j]) {
+							position source=((chesspiece)p).getchessposition().toposition();
+							position target=new position(i,j);
+							piece capturedpiece=makeMove(source, target);
+							boolean testcheck=testcheck(Color);
+							undomove(source, target, capturedpiece);
+							if(!testcheck) {
+								return false;
+								//essa é a logica do checkmate
+							}
+						}
+					}
+				}
+				
+				
+			}
+			return true;
+			// acima fala se n tiver nenhum movimento possivel,retorna check mat
+		}
+		
 		
 
 	private void placenewpiece(char column,int row,chesspiece Piece) {
@@ -169,19 +208,13 @@ public class chessmatch {
 	}
 	
 	private void initialsetup() {
-		placenewpiece('c', 1, new Rook(Board, color.WHITE));
-        placenewpiece('c', 2, new Rook(Board, color.WHITE));
-        placenewpiece('d', 2, new Rook(Board, color.WHITE));
-        placenewpiece('e', 2, new Rook(Board, color.WHITE));
-        placenewpiece('e', 1, new Rook(Board, color.WHITE));
-        placenewpiece('d', 1, new king(Board, color.WHITE));
+		placenewpiece('h', 7, new Rook(Board, color.WHITE));
+        placenewpiece('d', 1, new Rook(Board, color.WHITE));
+        placenewpiece('e', 1, new king(Board, color.WHITE));
+        
 
-        placenewpiece('c', 7, new Rook(Board, color.BLACK));
-        placenewpiece('c', 8, new Rook(Board, color.BLACK));
-        placenewpiece('d', 7, new Rook(Board, color.BLACK));
-        placenewpiece('e', 7, new Rook(Board, color.BLACK));
-        placenewpiece('e', 8, new Rook(Board, color.BLACK));
-        placenewpiece('d', 8, new king(Board, color.BLACK));
+        placenewpiece('b', 8, new Rook(Board, color.BLACK));
+        placenewpiece('a', 8, new king(Board, color.BLACK));
 	}
 
 	}
