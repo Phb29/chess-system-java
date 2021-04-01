@@ -15,6 +15,10 @@ public abstract class chesspiece extends piece {
 	public color getColor() {
 		return Color;
 	}
+	public ChessPosition getchessposition() {
+		return ChessPosition.fromposition(Position);
+		
+	}
 protected boolean isthereoponentpiece(position Position) {
 	chesspiece p= (chesspiece) getBoard().Piece(Position);
 	return p!=null && p.getColor() !=Color;

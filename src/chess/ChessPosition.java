@@ -23,7 +23,7 @@ public class ChessPosition {
 		return new position(8-row,column -'a');
 	}
 	protected static ChessPosition fromposition(position Position) {
-		return new ChessPosition((char)('a'- Position.getColumn()),8 - Position.getRow());
+		return new ChessPosition((char)('a'+ Position.getColumn()),8 - Position.getRow());
 	}
 	@Override
 	public String toString() {
