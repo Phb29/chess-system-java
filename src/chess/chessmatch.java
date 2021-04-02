@@ -12,7 +12,9 @@ import boardgame.position;
 import chess.pieces.Rook;
 import chess.pieces.bishop;
 import chess.pieces.king;
+import chess.pieces.knigth;
 import chess.pieces.pawn;
+import chess.pieces.queen;
 
 public class chessmatch {
 	private int turn;
@@ -228,9 +230,13 @@ public class chessmatch {
         placenewpiece('h', 2, new pawn(Board,color.WHITE));
         placenewpiece('c',1, new bishop(Board,color.WHITE));
         placenewpiece('f',1, new bishop(Board,color.WHITE));
+        placenewpiece('b',1, new knigth(Board,color.WHITE));
+        placenewpiece('g',1, new knigth(Board,color.WHITE));
+        placenewpiece('d',1, new queen(Board,color.WHITE));
         
-        
-
+        placenewpiece('d',8, new queen(Board,color.BLACK));
+        placenewpiece('b',8, new knigth(Board,color.BLACK));
+        placenewpiece('g',8, new knigth(Board,color.BLACK));
         placenewpiece('a', 8, new Rook(Board, color.BLACK));
         placenewpiece('h', 8, new Rook(Board, color.BLACK));
         placenewpiece('e', 8, new king(Board, color.BLACK));
