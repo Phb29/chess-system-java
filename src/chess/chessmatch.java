@@ -10,7 +10,9 @@ import boardgame.board;
 import boardgame.piece;
 import boardgame.position;
 import chess.pieces.Rook;
+import chess.pieces.bishop;
 import chess.pieces.king;
+import chess.pieces.pawn;
 
 public class chessmatch {
 	private int turn;
@@ -85,7 +87,9 @@ public class chessmatch {
 		return (chesspiece)capturedPiece;
 	}
 	private piece makeMove(position source,position target) {
-		piece p=Board.removePiece(source);
+		chesspiece p=(chesspiece)Board.removePiece(source);
+		p.increasemovecount();
+		
 		piece capturedpiece=Board.removePiece(target);
 		Board.placepiece(p, target);
 		
@@ -99,7 +103,10 @@ public class chessmatch {
 		return capturedpiece;
 	}
 	private void undomove(position source,position target,piece capturedpiece) {
-		piece p=Board.removePiece(target);
+		chesspiece p=(chesspiece)Board.removePiece(target);
+		p.decreasemovecount();
+		//o down cast ae serve pq fica dentro do chesspice,por isso usar
+		
 		Board.placepiece(p, source);
 		
 		if(capturedpiece!=null) {
@@ -208,13 +215,36 @@ public class chessmatch {
 	}
 	
 	private void initialsetup() {
-		placenewpiece('h', 7, new Rook(Board, color.WHITE));
-        placenewpiece('d', 1, new Rook(Board, color.WHITE));
+		placenewpiece('a', 1, new Rook(Board, color.WHITE));
+        placenewpiece('h', 1, new Rook(Board, color.WHITE));
         placenewpiece('e', 1, new king(Board, color.WHITE));
+        placenewpiece('a', 2, new pawn(Board,color.WHITE));
+        placenewpiece('b', 2, new pawn(Board,color.WHITE));
+        placenewpiece('c', 2, new pawn(Board,color.WHITE));
+        placenewpiece('d', 2, new pawn(Board,color.WHITE));
+        placenewpiece('e', 2, new pawn(Board,color.WHITE));
+        placenewpiece('f', 2, new pawn(Board,color.WHITE));
+        placenewpiece('g', 2, new pawn(Board,color.WHITE));
+        placenewpiece('h', 2, new pawn(Board,color.WHITE));
+        placenewpiece('c',1, new bishop(Board,color.WHITE));
+        placenewpiece('f',1, new bishop(Board,color.WHITE));
+        
         
 
-        placenewpiece('b', 8, new Rook(Board, color.BLACK));
-        placenewpiece('a', 8, new king(Board, color.BLACK));
+        placenewpiece('a', 8, new Rook(Board, color.BLACK));
+        placenewpiece('h', 8, new Rook(Board, color.BLACK));
+        placenewpiece('e', 8, new king(Board, color.BLACK));
+        placenewpiece('f',8, new bishop(Board,color.BLACK));
+        placenewpiece('c',8, new bishop(Board,color.BLACK));
+        placenewpiece('a', 7, new pawn(Board,color.BLACK));
+        placenewpiece('b', 7, new pawn(Board,color.BLACK));
+        placenewpiece('c', 7, new pawn(Board,color.BLACK));
+        placenewpiece('d', 7, new pawn(Board,color.BLACK));
+        placenewpiece('e', 7, new pawn(Board,color.BLACK));
+        placenewpiece('f', 7, new pawn(Board,color.BLACK));
+        placenewpiece('g', 7, new pawn(Board,color.BLACK));
+        placenewpiece('h', 7, new pawn(Board,color.BLACK));
+        
 	}
 
 	}
